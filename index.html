@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio - Integración Frontend y Backend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f4f4f9;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0070f3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0051a2;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            white-space: pre-wrap;
+            background: white;
+            display: inline-block;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Prueba de Integración Vercel y Render</h1>
+    
+    <!-- Botón requerido por la guía -->
+    <button onclick="consultarBackend()">Consultar backend</button>
+
+    <div id="resultado">Haz clic en el botón para ver la respuesta del servidor...</div>
+
+    <script>
+        async function consultarBackend() {
+            const divResultado = document.getElementById('resultado');
+            divResultado.textContent = "Conectando con el backend...";
+            
+            try {
+                // REEMPLAZA ESTA URL con tu enlace real de Render (el que termina en /api/mensaje)
+                const respuesta = await fetch('https://backend-laboratorio-4g3e.vercel.app/api/mensaje');
+                const datos = await respuesta.json();
+                
+                // Muestra el JSON devuelto por el backend
+                divResultado.textContent = JSON.stringify(datos, null, 2);
+            } catch (error) {
+                divResultado.textContent = "Error al conectar con el backend: " + error;
+            }
+        }
+    </script>
+
+</body>
+</html>
